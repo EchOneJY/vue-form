@@ -2,13 +2,11 @@ export default {
   namespaced: true,
   state: {
     //state
-    formData: {
-      list: []
-    }
+    selectedFormData: []
   },
   mutations: {
     setFormData(state, val) {
-      state.formData = val
+      state.selectedFormData = val
     }
   }
 }

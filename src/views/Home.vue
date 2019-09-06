@@ -29,28 +29,20 @@
             </el-button-group>
           </el-header>
           <el-main class="f1-main">
-            <draggable
-              class="form-box"
-              element="ul"
-              :list="formConfig"
-              :group="{ name: 'f1-form' }"
-              ghostClass="ghost"
-              :swapThreshold="0.5"
-              :animation="100"
-              @add="addFormItem"
-            >
-              <li v-for="(item, index) in formConfig" :key="index">
-                <el-button class="btn" plain>{{
-                  item.name
-                }}</el-button>
-              </li>
-            </draggable>
+            <f1-list :select.sync="formSelect"></f1-list>
           </el-main>
         </el-container>
 
-        <el-aside width="300px" class="f1-right-sider"
-          >Right Sider</el-aside
-        >
+        <el-aside width="300px" class="f1-right-sider">
+          <el-tabs v-model="activeName">
+            <el-tab-pane label="字段配置" name="formItem">
+              <f1-item-config :data="formSelect"></f1-item-config>
+            </el-tab-pane>
+            <el-tab-pane label="表单配置" name="form">
+              <f1-config :data="formSelect"></f1-config>
+            </el-tab-pane>
+          </el-tabs>
+        </el-aside>
       </el-container>
     </el-card>
   </div>
@@ -60,23 +52,31 @@
 // 引入拖拽组件
 import draggable from 'vuedraggable'
 import FormConfig from '../config/form'
+import { mapState, mapMutations } from 'vuex'
+import F1List from '../components/f1-list'
+import F1Config from '../components/f1-config'
+import F1ItemConfig from '../components/f1-item-config'
 export default {
   name: 'home',
   components: {
     // 调用组件
-    draggable
+    draggable,
+    F1List,
+    F1Config,
+    F1ItemConfig
   },
   data() {
     return {
       formConfig: FormConfig,
-      dragItem: {}
+      formSelect: {},
+      activeName: 'formItem'
     }
   },
+  computed: {
+    ...mapState('formData', ['selectedFormData'])
+  },
   methods: {
-    addFormItem(item) {
-      console.log(item)
-      this.dragItem = item
-    }
+    ...mapMutations('formData', ['setFormData'])
   }
 }
 </script>
