@@ -1,4 +1,4 @@
-.f1-form-list {
+.f1-list {
   .form-box {
     height: 450px;
 
@@ -18,14 +18,14 @@
   .form-item {
     position: relative;
     margin-bottom: 4px;
-    padding: 20px;
-    border: 1px dashed rgba($theme-color, .5);
-    background-color: rgba($theme-color, .05);
+    padding: 20px 60px 20px 10px;
+    border: 1px dashed rgba($theme-color, 0.5);
+    background-color: rgba($theme-color, 0.05);
 
     &.selected {
       outline: 2px solid $theme-color;
       border: 1px solid $theme-color;
-      background-color: rgba($theme-color, .1);
+      background-color: rgba($theme-color, 0.1);
     }
 
     &:after {
@@ -44,8 +44,6 @@
       background: $theme-color;
       z-index: 9;
       line-height: 24px;
-      // display: none;
-
       i {
         font-size: 16px;
         color: #fff;
@@ -53,8 +51,8 @@
     }
 
     .form-item-drag {
-      right: -20px;
-      top: -20px;
+      right: -60px;
+      top: -21px;
 
       i {
         cursor: move;
@@ -63,7 +61,7 @@
     }
 
     .form-item-action {
-      right: -20px;
+      right: -60px;
       bottom: -20px;
 
       i {
@@ -71,8 +69,5 @@
         margin: 0 4px;
       }
     }
-
-
   }
-
 }

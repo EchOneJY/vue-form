@@ -1,12 +1,19 @@
 export default {
   namespaced: true,
   state: {
-    //state
-    selectedFormData: []
+    selectedList: [],
+    config: {
+      labelPosition: 'left',
+      size: 'small',
+      labelWidth: '80'
+    }
   },
   mutations: {
     setFormData(state, val) {
-      state.selectedFormData = val
+      state.selectedList = val
+    },
+    setConfig(state, val) {
+      state.config = val
     }
   }
 }

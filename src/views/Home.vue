@@ -73,7 +73,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('formData', ['selectedFormData'])
+    ...mapState('formData', ['selectedList'])
   },
   methods: {
     ...mapMutations('formData', ['setFormData'])

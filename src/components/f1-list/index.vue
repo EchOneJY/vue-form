@@ -1,13 +1,14 @@
 <template>
   <el-form
-    class="f1-form-list"
-    label-position="left"
-    label-width="60px"
+    class="f1-list"
+    :label-position="config.labelPosition"
+    :label-width="config.labelWidth + 'px'"
+    :size="config.size"
   >
     <draggable
       class="form-box"
       element="div"
-      :list="selectedFormData"
+      :list="selectedList"
       :group="{ name: 'f1-form' }"
       ghostClass="ghost"
       :swapThreshold="0.5"
@@ -15,7 +16,7 @@
       @add="handleAdd"
       handle=".drag-widget"
     >
-      <template v-for="(item, index) in selectedFormData">
+      <template v-for="(item, index) in selectedList">
         <el-form-item
           class="form-item"
           :class="{ selected: item.key === select.key }"
@@ -68,7 +69,7 @@ export default {
     return {}
   },
   computed: {
-    ...mapState('formData', ['selectedFormData'])
+    ...mapState('formData', ['selectedList', 'config'])
   },
   methods: {
     ...mapMutations('formData', ['setFormData']),
@@ -81,7 +82,7 @@ export default {
         '_' +
         Math.ceil(Math.random() * 11111)
       const newFormData = JSON.parse(
-        JSON.stringify(this.selectedFormData)
+        JSON.stringify(this.selectedList)
       )
       newFormData[newIndex].key = key
       this.setFormData(newFormData)
@@ -89,13 +90,11 @@ export default {
     },
     //选择form-item
     handleSelect(idx) {
-      this.$emit('update:select', this.selectedFormData[idx])
+      this.$emit('update:select', this.selectedList[idx])
     },
     //复制form-item
     handleClone(idx) {
-      let newFormData = JSON.parse(
-        JSON.stringify(this.selectedFormData)
-      )
+      let newFormData = JSON.parse(JSON.stringify(this.selectedList))
       const key =
         Date.parse(new Date()) +
         '_' +
@@ -110,12 +109,10 @@ export default {
       if (idx === 0) {
         this.$emit('update:select', {})
       } else {
-        this.$emit('update:select', this.selectedFormData[idx - 1])
+        this.$emit('update:select', this.selectedList[idx - 1])
       }
 
-      let newFormData = JSON.parse(
-        JSON.stringify(this.selectedFormData)
-      )
+      let newFormData = JSON.parse(JSON.stringify(this.selectedList))
       newFormData.splice(idx, 1)
       this.setFormData(newFormData)
     }
