@@ -1,0 +1,15 @@
+$theme-color: teal;
+
+// element主题色
+@import './reset/element-variables';
+
+//样式重置
+@import './reset/reset';
+
+//公共样式
+@import './reset/common';
+
+//组件样式
+
+//主页
+@import './components/home';

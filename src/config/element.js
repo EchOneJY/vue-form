@@ -38,7 +38,13 @@ import {
   Col,
   Spinner,
   Loading,
-  Message
+  Message,
+  Container,
+  Header,
+  Aside,
+  Main,
+  Footer,
+  Card
 } from 'element-ui'
 
 Vue.use(Pagination)
@@ -77,6 +83,12 @@ Vue.use(Icon)
 Vue.use(Row)
 Vue.use(Col)
 Vue.use(Spinner)
+Vue.use(Container)
+Vue.use(Header)
+Vue.use(Aside)
+Vue.use(Main)
+Vue.use(Footer)
+Vue.use(Card)
 
 Vue.use(Loading.directive)
 

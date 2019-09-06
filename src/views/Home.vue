@@ -1,13 +1,58 @@
 <template>
-  <div class="home">
-    <!-- 调用组件  -->
-    <draggable element="ul" :list="formConfig">
-      <li v-for="(item, index) in formConfig" :key="index">
-        {{ item.name }}
-      </li>
-    </draggable>
-    <!-- 输出list数据 -->
-    {{ list }}
+  <div class="f1-home">
+    <el-card class="f1-box-card">
+      <el-container class="f1-box">
+        <el-aside width="300px" class="f1-left-sider">
+          <draggable
+            class="btn-box"
+            element="ul"
+            :list="formConfig"
+            :group="{ name: 'f1-form', pull: 'clone', put: false }"
+            :sort="false"
+            ghostClass="ghost"
+          >
+            <li v-for="(item, index) in formConfig" :key="index">
+              <el-button class="btn" plain>{{ item.name }}</el-button>
+            </li>
+          </draggable>
+        </el-aside>
+
+        <el-container class="f1-main-box">
+          <el-header class="f1-main-header">
+            <el-button-group size="small">
+              <el-button type="text" icon="el-icon-refresh"
+                >重置</el-button
+              >
+              <el-button type="text" icon="el-icon-view"
+                >预览</el-button
+              >
+            </el-button-group>
+          </el-header>
+          <el-main class="f1-main">
+            <draggable
+              class="form-box"
+              element="ul"
+              :list="formConfig"
+              :group="{ name: 'f1-form' }"
+              ghostClass="ghost"
+              :swapThreshold="0.5"
+              :animation="100"
+              @add="addFormItem"
+            >
+              <li v-for="(item, index) in formConfig" :key="index">
+                <el-button class="btn" plain>{{
+                  item.name
+                }}</el-button>
+              </li>
+            </draggable>
+          </el-main>
+        </el-container>
+
+        <el-aside width="300px" class="f1-right-sider"
+          >Right Sider</el-aside
+        >
+      </el-container>
+    </el-card>
   </div>
 </template>
 
@@ -23,7 +68,14 @@ export default {
   },
   data() {
     return {
-      formConfig: FormConfig
+      formConfig: FormConfig,
+      dragItem: {}
+    }
+  },
+  methods: {
+    addFormItem(item) {
+      console.log(item)
+      this.dragItem = item
     }
   }
 }
