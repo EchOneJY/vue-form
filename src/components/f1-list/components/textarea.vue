@@ -2,7 +2,7 @@
   <div v-if="item.type == 'textarea'">
     <el-input
       type="textarea"
-      :rows="5"
+      :rows="item.options.rows"
       v-model="item.options.defaultValue"
       :style="{ width: item.options.width }"
       :disabled="item.options.disabled"

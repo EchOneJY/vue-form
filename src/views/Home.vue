@@ -21,7 +21,7 @@
           <el-header class="f1-main-header">
             <el-button-group size="small">
               <el-button type="text" icon="el-icon-refresh"
-                >重置</el-button
+                >清空</el-button
               >
               <el-button type="text" icon="el-icon-view"
                 >预览</el-button
@@ -51,11 +51,11 @@
 <script>
 // 引入拖拽组件
 import draggable from 'vuedraggable'
-import FormConfig from '../config/form'
+import FormConfig from '@/config/formItem'
 import { mapState, mapMutations } from 'vuex'
-import F1List from '../components/f1-list'
-import F1Config from '../components/f1-config'
-import F1ItemConfig from '../components/f1-item-config'
+import F1List from '@/components/f1-list'
+import F1Config from '@/components/f1-config'
+import F1ItemConfig from '@/components/f1-item-config'
 export default {
   name: 'home',
   components: {

@@ -1,0 +1,37 @@
+<template>
+  <div v-if="item.type === 'radio'">
+    <el-radio-group
+      :class="{ block: item.options.block }"
+      v-model="item.options.radioDefaultValue"
+      :disabled="item.options.disabled"
+    >
+      <template v-if="item.options.style === 'normal'">
+        <el-radio
+          :label="radio.label"
+          v-for="(radio, index) in item.items"
+          :key="index"
+          >{{ radio.value }}</el-radio
+        >
+      </template>
+      <template v-if="item.options.style === 'button'">
+        <el-radio-button
+          :label="rItem.label"
+          v-for="(rItem, index) in item.items"
+          :key="index"
+          >{{ rItem.value }}</el-radio-button
+        >
+      </template>
+    </el-radio-group>
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    item: {
+      type: Object,
+      required: true
+    }
+  }
+}
+</script>

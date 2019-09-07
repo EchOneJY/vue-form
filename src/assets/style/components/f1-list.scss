@@ -20,12 +20,16 @@
     margin-bottom: 4px;
     padding: 20px 60px 20px 10px;
     border: 1px dashed rgba($theme-color, 0.5);
-    background-color: rgba($theme-color, 0.05);
+    background-color: rgba($theme-color, 0.03);
+
+    &:hover {
+      background-color: rgba($theme-color, 0.08);
+    }
 
     &.selected {
       outline: 2px solid $theme-color;
       border: 1px solid $theme-color;
-      background-color: rgba($theme-color, 0.1);
+      background-color: rgba($theme-color, 0.08);
     }
 
     &:after {
@@ -51,7 +55,7 @@
     }
 
     .form-item-drag {
-      right: -60px;
+      right: -61px;
       top: -21px;
 
       i {
@@ -61,12 +65,20 @@
     }
 
     .form-item-action {
-      right: -60px;
+      right: -61px;
       bottom: -20px;
 
       i {
         cursor: pointer;
         margin: 0 4px;
+      }
+    }
+
+    .block {
+      .el-radio,
+      .el-checkbox {
+        display: block;
+        line-height: 32px;
       }
     }
   }

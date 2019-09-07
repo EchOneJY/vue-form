@@ -6,9 +6,21 @@
       .el-form-item__label {
         padding: 0;
       }
+      .radio-block {
+        .el-radio {
+          display: block;
+          line-height: 36px !important;
+          .el-input {
+            width: 160px;
+          }
+        }
+      }
     }
     .label-width {
       margin-left: 10px;
+    }
+    .f1-pattern {
+      margin-top: 5px;
     }
   }
 }

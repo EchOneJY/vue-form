@@ -1,12 +1,10 @@
+import config from '@/config/form'
 export default {
   namespaced: true,
   state: {
     selectedList: [],
-    config: {
-      labelPosition: 'left',
-      size: 'small',
-      labelWidth: '80'
-    }
+    config,
+    setLabelWidth: false //自定义修改字段labelWidth状态
   },
   mutations: {
     setFormData(state, val) {
@@ -14,6 +12,10 @@ export default {
     },
     setConfig(state, val) {
       state.config = val
+    },
+    toggleSetLabelWidth(state, val) {
+      console.log(1)
+      state.setLabelWidth = val
     }
   }
 }

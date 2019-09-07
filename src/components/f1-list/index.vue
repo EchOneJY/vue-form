@@ -21,14 +21,19 @@
           class="form-item"
           :class="{ selected: item.key === select.key }"
           :label="item.name"
+          :label-width="item.options.labelWidth + 'px'"
           :key="item.key"
           @click.native.stop="handleSelect(index)"
+          :required="item.options.required"
         >
           <!-- Input -->
           <input-item :item="item"></input-item>
           <!-- TextArea -->
           <textarea-item :item="item"></textarea-item>
-
+          <!-- Radio -->
+          <radio-item :item="item"></radio-item>
+          <!-- CheckboxItem -->
+          <checkbox-item :item="item"></checkbox-item>
           <div
             class="form-item-action"
             v-if="item.key === select.key"
@@ -36,15 +41,17 @@
             <i
               class="el-icon-document-copy"
               @click.stop="handleClone(index)"
+              title="复制"
             ></i>
             <i
               class="el-icon-delete"
               @click.stop="handleDelete(index)"
+              title="删除"
             ></i>
           </div>
 
           <div class="form-item-drag" v-if="item.key === select.key">
-            <i class="el-icon-rank drag-widget"></i>
+            <i class="el-icon-rank drag-widget" title="拖拽"></i>
           </div>
         </el-form-item>
       </template>
@@ -55,24 +62,35 @@
 <script>
 import draggable from 'vuedraggable'
 import { mapState, mapMutations } from 'vuex'
-import InputItem from './input'
-import TextareaItem from './textarea'
+import InputItem from './components/input'
+import TextareaItem from './components/textarea'
+import RadioItem from './components/radio'
+import CheckboxItem from './components/checkbox'
 export default {
   components: {
     // 调用组件
     draggable,
     InputItem,
-    TextareaItem
+    TextareaItem,
+    RadioItem,
+    CheckboxItem
   },
   props: ['select'],
   data() {
     return {}
   },
   computed: {
-    ...mapState('formData', ['selectedList', 'config'])
+    ...mapState('formData', [
+      'selectedList',
+      'config',
+      'setLabelWidth'
+    ])
   },
   methods: {
-    ...mapMutations('formData', ['setFormData']),
+    ...mapMutations('formData', [
+      'setFormData',
+      'toggleSetLabelWidth'
+    ]),
     //添加到form-list
     handleAdd(evt) {
       const newIndex = evt.newIndex
@@ -91,6 +109,7 @@ export default {
     //选择form-item
     handleSelect(idx) {
       this.$emit('update:select', this.selectedList[idx])
+      this.toggleSetLabelWidth(false)
     },
     //复制form-item
     handleClone(idx) {
@@ -99,7 +118,8 @@ export default {
         Date.parse(new Date()) +
         '_' +
         Math.ceil(Math.random() * 11111)
-      const cloneData = { ...newFormData[idx], key }
+      const cloneData = JSON.parse(JSON.stringify(newFormData[idx]))
+      cloneData.key = key
       newFormData.splice(idx, 0, cloneData)
       this.setFormData(newFormData)
       this.$emit('update:select', newFormData[idx + 1])
