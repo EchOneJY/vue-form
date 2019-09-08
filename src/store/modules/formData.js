@@ -14,7 +14,6 @@ export default {
       state.config = val
     },
     toggleSetLabelWidth(state, val) {
-      console.log(1)
       state.setLabelWidth = val
     }
   }

@@ -1,12 +1,14 @@
 <template>
-  <div v-if="item.type === 'input'">
-    <el-input
+  <div v-if="item.type === 'number'">
+    <el-input-number
       v-model="item.options.defaultValue"
+      :min="item.options.min"
+      :max="item.options.max"
+      :step="item.options.step"
       :style="{ width: item.options.width }"
-      :placeholder="item.options.placeholder"
       :disabled="item.options.disabled"
       :size="item.options.size"
-    ></el-input>
+    ></el-input-number>
   </div>
 </template>
 

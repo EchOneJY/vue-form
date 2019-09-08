@@ -39,6 +39,7 @@
       top: 0;
       bottom: 0;
       display: block;
+      z-index: 9;
     }
 
     .form-item-drag,
@@ -46,7 +47,7 @@
       position: absolute;
       padding: 2px;
       background: $theme-color;
-      z-index: 9;
+      z-index: 10;
       line-height: 24px;
       i {
         font-size: 16px;

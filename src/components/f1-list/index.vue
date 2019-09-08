@@ -34,6 +34,10 @@
           <radio-item :item="item"></radio-item>
           <!-- CheckboxItem -->
           <checkbox-item :item="item"></checkbox-item>
+          <!-- InputNumber -->
+          <input-number-item :item="item"></input-number-item>
+          <!-- SelectItem -->
+          <select-item :item="item"></select-item>
           <div
             class="form-item-action"
             v-if="item.key === select.key"
@@ -66,6 +70,8 @@ import InputItem from './components/input'
 import TextareaItem from './components/textarea'
 import RadioItem from './components/radio'
 import CheckboxItem from './components/checkbox'
+import InputNumberItem from './components/number'
+import SelectItem from './components/select'
 export default {
   components: {
     // 调用组件
@@ -73,7 +79,9 @@ export default {
     InputItem,
     TextareaItem,
     RadioItem,
-    CheckboxItem
+    CheckboxItem,
+    InputNumberItem,
+    SelectItem
   },
   props: ['select'],
   data() {
@@ -94,17 +102,11 @@ export default {
     //添加到form-list
     handleAdd(evt) {
       const newIndex = evt.newIndex
-      //为拖拽到容器的元素添加唯一 key
-      const key =
-        Date.parse(new Date()) +
-        '_' +
-        Math.ceil(Math.random() * 11111)
-      const newFormData = JSON.parse(
-        JSON.stringify(this.selectedList)
+      this.selectedList[newIndex] = this.handleData(
+        this.selectedList[newIndex]
       )
-      newFormData[newIndex].key = key
-      this.setFormData(newFormData)
-      this.$emit('update:select', newFormData[newIndex])
+      this.setFormData(this.selectedList)
+      this.$emit('update:select', this.selectedList[newIndex])
     },
     //选择form-item
     handleSelect(idx) {
@@ -113,16 +115,10 @@ export default {
     },
     //复制form-item
     handleClone(idx) {
-      let newFormData = JSON.parse(JSON.stringify(this.selectedList))
-      const key =
-        Date.parse(new Date()) +
-        '_' +
-        Math.ceil(Math.random() * 11111)
-      const cloneData = JSON.parse(JSON.stringify(newFormData[idx]))
-      cloneData.key = key
-      newFormData.splice(idx, 0, cloneData)
-      this.setFormData(newFormData)
-      this.$emit('update:select', newFormData[idx + 1])
+      const cloneData = this.handleData(this.selectedList[idx])
+      this.selectedList.splice(idx, 0, cloneData)
+      this.setFormData(this.selectedList)
+      this.$emit('update:select', this.selectedList[idx + 1])
     },
     //删除form-item
     handleDelete(idx) {
@@ -131,10 +127,19 @@ export default {
       } else {
         this.$emit('update:select', this.selectedList[idx - 1])
       }
-
-      let newFormData = JSON.parse(JSON.stringify(this.selectedList))
-      newFormData.splice(idx, 1)
-      this.setFormData(newFormData)
+      this.selectedList.splice(idx, 1)
+      this.setFormData(this.selectedList)
+    },
+    //处理数据
+    handleData(obj) {
+      const newObj = JSON.parse(JSON.stringify(obj))
+      //为拖拽到容器的元素添加唯一 key
+      const key =
+        Date.parse(new Date()) +
+        '_' +
+        Math.ceil(Math.random() * 11111)
+      newObj.key = key
+      return newObj
     }
   }
 }

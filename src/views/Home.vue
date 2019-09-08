@@ -20,10 +20,16 @@
         <el-container class="f1-main-box">
           <el-header class="f1-main-header">
             <el-button-group size="small">
-              <el-button type="text" icon="el-icon-refresh"
+              <el-button
+                type="text"
+                icon="el-icon-refresh"
+                @click="clearSelectList"
                 >清空</el-button
               >
-              <el-button type="text" icon="el-icon-view"
+              <el-button
+                type="text"
+                icon="el-icon-view"
+                @click="generatorVisible = true"
                 >预览</el-button
               >
             </el-button-group>
@@ -45,6 +51,12 @@
         </el-aside>
       </el-container>
     </el-card>
+
+    <!-- 预览生成表单 -->
+    <f1-generator
+      :visible.sync="generatorVisible"
+      @close="generatorVisible = false"
+    ></f1-generator>
   </div>
 </template>
 
@@ -56,6 +68,7 @@ import { mapState, mapMutations } from 'vuex'
 import F1List from '@/components/f1-list'
 import F1Config from '@/components/f1-config'
 import F1ItemConfig from '@/components/f1-item-config'
+import F1Generator from '@/components/f1-generator'
 export default {
   name: 'home',
   components: {
@@ -63,20 +76,25 @@ export default {
     draggable,
     F1List,
     F1Config,
-    F1ItemConfig
+    F1ItemConfig,
+    F1Generator
   },
   data() {
     return {
       formConfig: FormConfig,
       formSelect: {},
-      activeName: 'formItem'
+      activeName: 'formItem',
+      generatorVisible: false
     }
   },
   computed: {
     ...mapState('formData', ['selectedList'])
   },
   methods: {
-    ...mapMutations('formData', ['setFormData'])
+    ...mapMutations('formData', ['setFormData']),
+    clearSelectList() {
+      this.setFormData([])
+    }
   }
 }
 </script>

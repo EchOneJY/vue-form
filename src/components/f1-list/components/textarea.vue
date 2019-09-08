@@ -7,6 +7,7 @@
       :style="{ width: item.options.width }"
       :disabled="item.options.disabled"
       :placeholder="item.options.placeholder"
+      :size="item.options.size"
     ></el-input>
   </div>
 </template>

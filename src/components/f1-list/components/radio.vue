@@ -4,6 +4,7 @@
       :class="{ block: item.options.block }"
       v-model="item.options.radioDefaultValue"
       :disabled="item.options.disabled"
+      :size="item.options.size"
     >
       <template v-if="item.options.style === 'normal'">
         <el-radio

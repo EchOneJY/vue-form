@@ -12,7 +12,8 @@ export default [
       dataType: 'string',
       pattern: '',
       disabled: false,
-      labelWidth: config.labelWidth
+      labelWidth: config.labelWidth,
+      size: config.size
     }
   },
   {
@@ -26,7 +27,8 @@ export default [
       pattern: '',
       placeholder: '',
       rows: '5',
-      labelWidth: config.labelWidth
+      labelWidth: config.labelWidth,
+      size: config.size
     }
   },
   {
@@ -38,7 +40,8 @@ export default [
       required: false,
       disabled: false,
       style: 'normal',
-      labelWidth: config.labelWidth
+      labelWidth: config.labelWidth,
+      size: config.size
     },
     items: [
       {
@@ -64,7 +67,8 @@ export default [
       required: false,
       disabled: false,
       style: 'normal',
-      labelWidth: config.labelWidth
+      labelWidth: config.labelWidth,
+      size: config.size
     },
     items: [
       {
@@ -86,13 +90,46 @@ export default [
     ]
   },
   {
-    type: 'time',
-    name: '时间选择器',
-    icon: 'icon-time'
+    type: 'select',
+    name: '选择器',
+    options: {
+      selectDefaultValue: [],
+      required: false,
+      disabled: false,
+      labelWidth: config.labelWidth,
+      size: config.size
+    },
+    items: [
+      {
+        value: '00',
+        label: '选项1'
+      },
+      {
+        value: '01',
+        label: '选项2'
+      },
+      {
+        value: '02',
+        label: '选项3'
+      },
+      {
+        value: '03',
+        label: '选项4'
+      }
+    ]
   },
   {
-    type: 'date',
-    name: '日期选择器',
-    icon: 'icon-date'
+    type: 'number',
+    name: '计数器',
+    options: {
+      param: '',
+      defaultValue: 0,
+      min: 0,
+      max: 100,
+      step: 1,
+      disabled: false,
+      labelWidth: config.labelWidth,
+      size: config.size
+    }
   }
 ]

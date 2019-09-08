@@ -6,14 +6,21 @@
       .el-form-item__label {
         padding: 0;
       }
-      .radio-block {
-        .el-radio {
-          display: block;
-          line-height: 36px !important;
-          .el-input {
-            width: 160px;
-          }
+
+      .el-radio,
+      .el-checkbox {
+        .el-input {
+          width: 160px;
         }
+      }
+      .el-radio {
+        margin: 0 0 4px 0;
+      }
+
+      i {
+        margin-left: 8px;
+        font-size: 16px;
+        cursor: pointer;
       }
     }
     .label-width {
