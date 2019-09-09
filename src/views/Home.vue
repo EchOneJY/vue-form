@@ -35,14 +35,18 @@
             </el-button-group>
           </el-header>
           <el-main class="f1-main">
-            <f1-list :select.sync="formSelect"></f1-list>
+            <el-scrollbar>
+              <f1-list :select.sync="formSelect"></f1-list>
+            </el-scrollbar>
           </el-main>
         </el-container>
 
         <el-aside width="300px" class="f1-right-sider">
           <el-tabs v-model="activeName">
             <el-tab-pane label="字段配置" name="formItem">
-              <f1-item-config :data="formSelect"></f1-item-config>
+              <el-scrollbar>
+                <f1-item-config :data="formSelect"></f1-item-config>
+              </el-scrollbar>
             </el-tab-pane>
             <el-tab-pane label="表单配置" name="form">
               <f1-config :data="formSelect"></f1-config>

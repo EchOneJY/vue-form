@@ -122,7 +122,11 @@ export default {
     //删除form-item
     handleDelete(idx) {
       if (idx === 0) {
-        this.$emit('update:select', {})
+        if (this.selectedList.length < 2) {
+          this.$emit('update:select', {})
+        } else {
+          this.$emit('update:select', this.selectedList[idx + 1])
+        }
       } else {
         this.$emit('update:select', this.selectedList[idx - 1])
       }

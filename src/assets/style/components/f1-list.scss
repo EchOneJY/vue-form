@@ -1,7 +1,5 @@
 .f1-list {
   .form-box {
-    height: 450px;
-
     .form-item {
       position: relative;
       margin-bottom: 4px;
@@ -18,7 +16,6 @@
         border: 1px solid $theme-color;
         background-color: rgba($theme-color, 0.08);
       }
-
 
       .form-item-drag,
       .form-item-action {
@@ -82,7 +79,6 @@
     }
 
     .block {
-
       .el-radio,
       .el-checkbox {
         display: block;

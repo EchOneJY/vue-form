@@ -1,7 +1,6 @@
 .f1-config {
-
   .el-form {
-    padding: 0 24px;
+    padding: 15px 24px;
 
     .el-form-item {
       margin-bottom: 12px;
@@ -36,8 +35,10 @@
       margin-left: 10px;
     }
 
-    .f1-pattern {
-      margin-top: 5px;
+    .f1-pattern,
+    .type-select {
+      margin-top: 10px;
+      width: 220px;
     }
   }
 }

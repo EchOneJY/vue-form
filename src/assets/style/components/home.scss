@@ -54,7 +54,7 @@
       }
 
       .f1-main {
-        padding: 2px;
+        padding: 3px;
       }
     }
 
@@ -72,7 +72,6 @@
           height: 60px;
           line-height: 60px;
         }
-
       }
 
       .el-tabs {
@@ -83,12 +82,12 @@
         }
 
         .el-tabs__content {
-          overflow: auto;
           height: calc(100% - 60px);
-          padding: 15px 0;
+          .el-tab-pane {
+            height: 100%;
+          }
         }
       }
-
     }
   }
 }
@@ -97,5 +96,14 @@
   .el-card__body {
     padding: 0;
     height: 100%;
+  }
+  .el-scrollbar {
+    height: 100%;
+    .el-scrollbar__wrap {
+      overflow-x: hidden;
+    }
+    .el-scrollbar__bar.is-vertical {
+      right: -10px;
+    }
   }
 }

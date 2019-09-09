@@ -44,7 +44,8 @@ import {
   Aside,
   Main,
   Footer,
-  Card
+  Card,
+  Scrollbar
 } from 'element-ui'
 
 Vue.use(Pagination)
@@ -89,6 +90,7 @@ Vue.use(Aside)
 Vue.use(Main)
 Vue.use(Footer)
 Vue.use(Card)
+Vue.use(Scrollbar)
 
 Vue.use(Loading.directive)
 

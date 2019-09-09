@@ -3,6 +3,7 @@
     <template v-if="models">
       <el-select
         v-model="models[item.param]"
+        :style="{ width: item.options.width }"
         :placeholder="item.options.placeholder"
         :disabled="item.options.disabled"
         :multiple="item.options.multiple"
@@ -18,6 +19,7 @@
     <template v-else>
       <el-select
         v-model="item.options.defaultValue"
+        :style="{ width: item.options.width }"
         :placeholder="item.options.placeholder"
         :disabled="item.options.disabled"
         :multiple="item.options.multiple"

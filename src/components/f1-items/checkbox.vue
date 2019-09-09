@@ -3,6 +3,7 @@
     <template v-if="models">
       <el-checkbox-group
         :class="{ block: item.options.block }"
+        :style="{ width: item.options.width }"
         v-model="models[item.param]"
         :disabled="item.options.disabled"
         :size="item.options.size"
@@ -28,6 +29,7 @@
     <template v-else>
       <el-checkbox-group
         :class="{ block: item.options.block }"
+        :style="{ width: item.options.width }"
         v-model="item.options.defaultValue"
         :disabled="item.options.disabled"
         :size="item.options.size"

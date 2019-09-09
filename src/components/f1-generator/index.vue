@@ -95,10 +95,6 @@ export default {
           }
         })
       }
-    },
-    toggleChange(e) {
-      console.log(1)
-      console.log(e)
     }
   }
 }

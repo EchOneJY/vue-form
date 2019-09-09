@@ -44,6 +44,7 @@ export default [
     param: '',
     options: {
       block: false,
+      width: '',
       defaultValue: '',
       required: false,
       disabled: false,
@@ -75,6 +76,7 @@ export default [
     param: '',
     options: {
       block: false,
+      width: '',
       defaultValue: [],
       required: false,
       disabled: false,
@@ -110,6 +112,7 @@ export default [
     param: '',
     options: {
       defaultValue: [],
+      width: '',
       required: false,
       disabled: false,
       labelWidth: {

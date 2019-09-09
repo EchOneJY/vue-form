@@ -1,7 +1,9 @@
 .f1-generator {
+  .el-dialog__body {
+    padding: 30px 50px;
+  }
   .el-form-item {
     .block {
-
       .el-radio,
       .el-checkbox {
         display: block;

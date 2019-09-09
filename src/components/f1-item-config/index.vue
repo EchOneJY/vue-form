@@ -75,7 +75,7 @@
       </el-form-item>
       <!-- multiple -->
       <el-form-item
-        label="multiple"
+        label="多选"
         v-if="data.options.hasOwnProperty('multiple')"
       >
         <el-switch
@@ -204,13 +204,28 @@
         label="校验"
         v-if="data.options.hasOwnProperty('required')"
       >
-        <el-checkbox v-model="data.options.required"
+        <el-checkbox
+          v-model="data.options.required"
+          @change="validateRequired"
           >必填</el-checkbox
         >
+        <el-input
+          class="f1-pattern"
+          v-model="data.options.pattern"
+          placeholder="无需加双斜杠"
+          v-if="data.options.hasOwnProperty('pattern')"
+          @blur="validatePattern"
+        >
+          <template slot="prepend"
+            >正则</template
+          >
+        </el-input>
         <el-select
+          class="type-select"
           v-model="data.options.dataType"
-          placeholder="请选择"
+          placeholder="数据类型"
           v-if="data.options.hasOwnProperty('dataType')"
+          @change="validateDataType"
         >
           <el-option
             v-for="item in dataTypeOptions"
@@ -219,12 +234,6 @@
             :value="item.value"
           ></el-option>
         </el-select>
-        <el-input
-          class="f1-pattern"
-          v-model="data.options.pattern"
-          placeholder="正则"
-          v-if="data.options.hasOwnProperty('pattern')"
-        ></el-input>
       </el-form-item>
     </el-form>
   </div>
@@ -236,6 +245,10 @@ export default {
   data() {
     return {
       dataTypeOptions: [
+        {
+          label: '无',
+          value: ''
+        },
         {
           label: '字符串',
           value: 'string'
@@ -270,17 +283,14 @@ export default {
     }
   },
   watch: {
-    'data.options.required': function(newVal, oldVal) {
-      if (oldVal !== undefined) {
-        this.validateRequired(newVal)
+    'data.key': function() {
+      this.validator = {
+        type: null,
+        required: null,
+        pattern: null
       }
-    },
-    'data.options.dataType': function(newVal) {
-      this.validateDataType(newVal)
-    },
-    'data.options.pattern': function(newVal, oldVal) {
-      if (oldVal !== undefined) {
-        this.validatePattern(newVal)
+      if (this.data.options.hasOwnProperty('dataType')) {
+        this.validateDataType(this.data.options.dataType)
       }
     }
   },
@@ -322,6 +332,7 @@ export default {
     },
     //必填校验
     validateRequired(val) {
+      console.log(val)
       if (val) {
         this.validator.required = {
           required: true,
@@ -337,6 +348,7 @@ export default {
     },
     //正则校验
     validatePattern(val) {
+      console.log(val)
       if (val) {
         this.validator.pattern = {
           pattern: val,
@@ -345,7 +357,9 @@ export default {
       } else {
         this.validator.pattern = null
       }
-      this.addRules()
+      this.$nextTick(() => {
+        this.addRules()
+      })
     },
     //数据类型校验
     validateDataType(val) {
@@ -357,7 +371,9 @@ export default {
       } else {
         this.validator.type = null
       }
-      this.addRules()
+      this.$nextTick(() => {
+        this.addRules()
+      })
     }
   }
 }
