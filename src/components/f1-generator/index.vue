@@ -1,6 +1,7 @@
 <template>
-  <el-dialog :visible.sync="dialogVisible">
+  <el-dialog class="f1-generator" :visible.sync="dialogVisible">
     <el-form
+      :style="{ width: config.width }"
       :model="models"
       :rules="rules"
       :label-width="config.labelWidth + 'px'"
@@ -9,21 +10,31 @@
     >
       <el-form-item
         :label="item.name"
+        :prop="item.param"
         v-for="(item, index) in this.selectedList"
-        :key="item.name + index"
+        :key="item.type + index"
+        :required="item.options.required"
+        :label-width="
+          item.options.labelWidth.custom
+            ? item.options.labelWidth.value + 'px'
+            : config.labelWidth + 'px'
+        "
       >
         <!-- Input -->
-        <input-item :item="item"></input-item>
+        <input-item :item="item" :models="models"></input-item>
         <!-- TextArea -->
-        <textarea-item :item="item"></textarea-item>
+        <textarea-item :item="item" :models="models"></textarea-item>
         <!-- Radio -->
-        <radio-item :item="item"></radio-item>
+        <radio-item :item="item" :models="models"></radio-item>
         <!-- CheckboxItem -->
-        <checkbox-item :item="item"></checkbox-item>
+        <checkbox-item :item="item" :models="models"></checkbox-item>
         <!-- InputNumber -->
-        <input-number-item :item="item"></input-number-item>
+        <input-number-item
+          :item="item"
+          :models="models"
+        ></input-number-item>
         <!-- SelectItem -->
-        <select-item :item="item"></select-item>
+        <select-item :item="item" :models="models"></select-item>
       </el-form-item>
     </el-form>
   </el-dialog>
@@ -31,12 +42,12 @@
 
 <script>
 import { mapState } from 'vuex'
-import InputItem from '../f1-list/components/input'
-import TextareaItem from '../f1-list/components/textarea'
-import RadioItem from '../f1-list/components/radio'
-import CheckboxItem from '../f1-list/components/checkbox'
-import InputNumberItem from '../f1-list/components/number'
-import SelectItem from '../f1-list/components/select'
+import InputItem from '../f1-items/input'
+import TextareaItem from '../f1-items/textarea'
+import RadioItem from '../f1-items/radio'
+import CheckboxItem from '../f1-items/checkbox'
+import InputNumberItem from '../f1-items/number'
+import SelectItem from '../f1-items/select'
 export default {
   props: ['visible'],
   components: {
@@ -55,6 +66,8 @@ export default {
     dialogVisible(val) {
       if (!val) {
         this.$emit('close')
+      } else {
+        this.createFormData()
       }
     }
   },
@@ -67,6 +80,26 @@ export default {
   },
   computed: {
     ...mapState('formData', ['selectedList', 'config'])
+  },
+  methods: {
+    createFormData() {
+      if (this.selectedList.length > 0) {
+        this.selectedList.map(item => {
+          this.$set(
+            this.models,
+            item.param,
+            item.options.defaultValue
+          )
+          if (item.hasOwnProperty('rules') && item.rules.length > 0) {
+            this.rules[item.param] = item.rules
+          }
+        })
+      }
+    },
+    toggleChange(e) {
+      console.log(1)
+      console.log(e)
+    }
   }
 }
 </script>

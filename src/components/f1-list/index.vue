@@ -7,7 +7,7 @@
   >
     <draggable
       class="form-box"
-      element="div"
+      element="ul"
       :list="selectedList"
       :group="{ name: 'f1-form' }"
       ghostClass="ghost"
@@ -16,13 +16,19 @@
       @add="handleAdd"
       handle=".drag-widget"
     >
-      <template v-for="(item, index) in selectedList">
+      <li
+        class="form-item"
+        v-for="(item, index) in selectedList"
+        :class="{ selected: item.key === select.key }"
+        :key="item.key"
+      >
         <el-form-item
-          class="form-item"
-          :class="{ selected: item.key === select.key }"
           :label="item.name"
-          :label-width="item.options.labelWidth + 'px'"
-          :key="item.key"
+          :label-width="
+            item.options.labelWidth.custom
+              ? item.options.labelWidth.value + 'px'
+              : config.labelWidth + 'px'
+          "
           @click.native.stop="handleSelect(index)"
           :required="item.options.required"
         >
@@ -38,27 +44,24 @@
           <input-number-item :item="item"></input-number-item>
           <!-- SelectItem -->
           <select-item :item="item"></select-item>
-          <div
-            class="form-item-action"
-            v-if="item.key === select.key"
-          >
-            <i
-              class="el-icon-document-copy"
-              @click.stop="handleClone(index)"
-              title="复制"
-            ></i>
-            <i
-              class="el-icon-delete"
-              @click.stop="handleDelete(index)"
-              title="删除"
-            ></i>
-          </div>
-
-          <div class="form-item-drag" v-if="item.key === select.key">
-            <i class="el-icon-rank drag-widget" title="拖拽"></i>
-          </div>
         </el-form-item>
-      </template>
+        <div class="form-item-action" v-if="item.key === select.key">
+          <i
+            class="el-icon-document-copy"
+            @click.stop="handleClone(index)"
+            title="复制"
+          ></i>
+          <i
+            class="el-icon-delete"
+            @click.stop="handleDelete(index)"
+            title="删除"
+          ></i>
+        </div>
+
+        <div class="form-item-drag" v-if="item.key === select.key">
+          <i class="el-icon-rank drag-widget" title="拖拽"></i>
+        </div>
+      </li>
     </draggable>
   </el-form>
 </template>
@@ -66,12 +69,12 @@
 <script>
 import draggable from 'vuedraggable'
 import { mapState, mapMutations } from 'vuex'
-import InputItem from './components/input'
-import TextareaItem from './components/textarea'
-import RadioItem from './components/radio'
-import CheckboxItem from './components/checkbox'
-import InputNumberItem from './components/number'
-import SelectItem from './components/select'
+import InputItem from '../f1-items/input'
+import TextareaItem from '../f1-items/textarea'
+import RadioItem from '../f1-items/radio'
+import CheckboxItem from '../f1-items/checkbox'
+import InputNumberItem from '../f1-items/number'
+import SelectItem from '../f1-items/select'
 export default {
   components: {
     // 调用组件
@@ -95,10 +98,7 @@ export default {
     ])
   },
   methods: {
-    ...mapMutations('formData', [
-      'setFormData',
-      'toggleSetLabelWidth'
-    ]),
+    ...mapMutations('formData', ['setFormData']),
     //添加到form-list
     handleAdd(evt) {
       const newIndex = evt.newIndex
@@ -111,7 +111,6 @@ export default {
     //选择form-item
     handleSelect(idx) {
       this.$emit('update:select', this.selectedList[idx])
-      this.toggleSetLabelWidth(false)
     },
     //复制form-item
     handleClone(idx) {
@@ -139,6 +138,13 @@ export default {
         '_' +
         Math.ceil(Math.random() * 11111)
       newObj.key = key
+      newObj.param = newObj.type + '_' + key
+      // 特殊处理
+      if (newObj.options.type === 'select') {
+        newObj.options.defaultValue = newObj.options.multiple
+          ? []
+          : ''
+      }
       return newObj
     }
   }

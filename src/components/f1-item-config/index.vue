@@ -12,9 +12,27 @@
       <!-- 默认值 -->
       <el-form-item
         label="默认值"
-        v-if="data.options.hasOwnProperty('defaultValue')"
+        v-if="
+          data.options.hasOwnProperty('defaultValue') &&
+            (data.type === 'input' ||
+              data.type === 'textarea' ||
+              data.type === 'number')
+        "
       >
-        <el-input v-model="data.options.defaultValue"></el-input>
+        <el-input
+          v-if="data.type === 'input'"
+          v-model="data.options.defaultValue"
+        ></el-input>
+        <el-input
+          v-if="data.type === 'textarea'"
+          type="textarea"
+          :rows="4"
+          v-model="data.options.defaultValue"
+        ></el-input>
+        <el-input-number
+          v-if="data.type === 'number'"
+          v-model="data.options.defaultValue"
+        ></el-input-number>
       </el-form-item>
       <!-- 最小 -->
       <el-form-item
@@ -39,13 +57,7 @@
           v-model="data.options.step"
         ></el-input-number>
       </el-form-item>
-      <!-- 宽度 -->
-      <el-form-item
-        label="宽度"
-        v-if="data.options.hasOwnProperty('width')"
-      >
-        <el-input v-model="data.options.width"></el-input>
-      </el-form-item>
+      <!-- rows -->
       <el-form-item
         label="rows"
         v-if="data.options.hasOwnProperty('rows')"
@@ -61,13 +73,26 @@
       >
         <el-input v-model="data.options.placeholder"></el-input>
       </el-form-item>
+      <!-- multiple -->
+      <el-form-item
+        label="multiple"
+        v-if="data.options.hasOwnProperty('multiple')"
+      >
+        <el-switch
+          v-model="data.options.multiple"
+          @change="toggleDefaultValue"
+        ></el-switch>
+      </el-form-item>
       <!-- 选项 -->
       <el-form-item label="选项" v-if="data.hasOwnProperty('items')">
         <!-- radio -->
         <el-radio-group
           class="block"
-          v-if="data.type === 'radio'"
-          v-model="data.options.radioDefaultValue"
+          v-if="
+            data.type === 'radio' ||
+              (data.type === 'select' && !data.options.multiple)
+          "
+          v-model="data.options.defaultValue"
         >
           <li
             v-for="(rItem, index) in data.items"
@@ -86,9 +111,11 @@
         <!-- checkbox -->
         <el-checkbox-group
           class="block"
-          v-if="data.type === 'checkbox'"
-          v-model="data.options.checkboxDefaultValue"
-          :disabled="data.options.disabled"
+          v-if="
+            data.type === 'checkbox' ||
+              (data.type === 'select' && data.options.multiple)
+          "
+          v-model="data.options.defaultValue"
         >
           <li
             v-for="(cItem, index) in data.items"
@@ -96,27 +123,6 @@
           >
             <el-checkbox :label="cItem.label">
               <el-input v-model="cItem.value"></el-input>
-            </el-checkbox>
-            <i
-              class="el-icon-delete"
-              @click="deleteOption(index)"
-              title="删除"
-            ></i>
-          </li>
-        </el-checkbox-group>
-        <!-- select -->
-        <el-checkbox-group
-          class="block"
-          v-if="data.type === 'select'"
-          v-model="data.options.selectDefaultValue"
-          :disabled="data.options.disabled"
-        >
-          <li
-            v-for="(sItem, index) in data.items"
-            :key="sItem.value + index"
-          >
-            <el-checkbox :label="sItem.value">
-              <el-input v-model="sItem.label"></el-input>
             </el-checkbox>
             <i
               class="el-icon-delete"
@@ -159,13 +165,22 @@
         label="标签宽度"
         v-if="data.options.hasOwnProperty('labelWidth')"
       >
-        <el-checkbox v-model="setLabelWidth">自定义</el-checkbox>
+        <el-checkbox v-model="data.options.labelWidth.custom"
+          >自定义</el-checkbox
+        >
         <el-input-number
           class="label-width"
-          :disabled="!setLabelWidth"
-          v-model="data.options.labelWidth"
+          :disabled="!data.options.labelWidth.custom"
+          v-model="data.options.labelWidth.value"
           :step="10"
         ></el-input-number>
+      </el-form-item>
+      <!-- 字段宽度 -->
+      <el-form-item
+        label="宽度"
+        v-if="data.options.hasOwnProperty('width')"
+      >
+        <el-input v-model="data.options.width"></el-input>
       </el-form-item>
       <!-- 字段尺寸 -->
       <el-form-item label="字段尺寸">
@@ -246,16 +261,26 @@ export default {
           value: 'email'
         }
       ],
-      radioStyles: ['normal', 'button']
+      radioStyles: ['normal', 'button'],
+      validator: {
+        type: null,
+        required: null,
+        pattern: null
+      }
     }
   },
-  computed: {
-    setLabelWidth: {
-      get() {
-        return this.$store.state.formData.setLabelWidth
-      },
-      set(val) {
-        this.$store.state.formData.setLabelWidth = val
+  watch: {
+    'data.options.required': function(newVal, oldVal) {
+      if (oldVal !== undefined) {
+        this.validateRequired(newVal)
+      }
+    },
+    'data.options.dataType': function(newVal) {
+      this.validateDataType(newVal)
+    },
+    'data.options.pattern': function(newVal, oldVal) {
+      if (oldVal !== undefined) {
+        this.validatePattern(newVal)
       }
     }
   },
@@ -268,6 +293,71 @@ export default {
     },
     deleteOption(idx) {
       this.data.items.splice(idx, 1)
+    },
+    toggleDefaultValue(state) {
+      this.data.options.defaultValue = state ? [] : ''
+      this.data.items = [
+        {
+          value: '选项1',
+          label: '00'
+        },
+        {
+          value: '选项2',
+          label: '01'
+        },
+        {
+          value: '选项3',
+          label: '02'
+        }
+      ]
+    },
+    //添加rules
+    addRules() {
+      this.data.rules = []
+      Object.keys(this.validator).map(key => {
+        if (this.validator[key]) {
+          this.data.rules.push(this.validator[key])
+        }
+      })
+    },
+    //必填校验
+    validateRequired(val) {
+      if (val) {
+        this.validator.required = {
+          required: true,
+          message: `${this.data.name}必须填写`
+        }
+      } else {
+        this.validator.required = null
+      }
+
+      this.$nextTick(() => {
+        this.addRules()
+      })
+    },
+    //正则校验
+    validatePattern(val) {
+      if (val) {
+        this.validator.pattern = {
+          pattern: val,
+          message: this.data.name + '格式不匹配'
+        }
+      } else {
+        this.validator.pattern = null
+      }
+      this.addRules()
+    },
+    //数据类型校验
+    validateDataType(val) {
+      if (val) {
+        this.validator.type = {
+          type: val,
+          message: this.data.name + '格式不正确'
+        }
+      } else {
+        this.validator.type = null
+      }
+      this.addRules()
     }
   }
 }

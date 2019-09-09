@@ -3,8 +3,8 @@ export default [
   {
     type: 'input',
     name: 'Input',
+    param: '',
     options: {
-      param: '',
       width: '100%',
       placeholder: '',
       defaultValue: '',
@@ -12,13 +12,17 @@ export default [
       dataType: 'string',
       pattern: '',
       disabled: false,
-      labelWidth: config.labelWidth,
+      labelWidth: {
+        custom: false,
+        value: config.labelWidth
+      },
       size: config.size
     }
   },
   {
     type: 'textarea',
     name: 'TextArea',
+    param: '',
     options: {
       width: '100%',
       defaultValue: '',
@@ -27,20 +31,27 @@ export default [
       pattern: '',
       placeholder: '',
       rows: '5',
-      labelWidth: config.labelWidth,
+      labelWidth: {
+        custom: false,
+        value: config.labelWidth
+      },
       size: config.size
     }
   },
   {
     type: 'radio',
     name: '单选框组',
+    param: '',
     options: {
       block: false,
-      radioDefaultValue: '',
+      defaultValue: '',
       required: false,
       disabled: false,
       style: 'normal',
-      labelWidth: config.labelWidth,
+      labelWidth: {
+        custom: false,
+        value: config.labelWidth
+      },
       size: config.size
     },
     items: [
@@ -61,13 +72,17 @@ export default [
   {
     type: 'checkbox',
     name: '多选框组',
+    param: '',
     options: {
       block: false,
-      checkboxDefaultValue: [],
+      defaultValue: [],
       required: false,
       disabled: false,
       style: 'normal',
-      labelWidth: config.labelWidth,
+      labelWidth: {
+        custom: false,
+        value: config.labelWidth
+      },
       size: config.size
     },
     items: [
@@ -92,35 +107,37 @@ export default [
   {
     type: 'select',
     name: '选择器',
+    param: '',
     options: {
-      selectDefaultValue: [],
+      defaultValue: [],
       required: false,
       disabled: false,
-      labelWidth: config.labelWidth,
-      size: config.size
+      labelWidth: {
+        custom: false,
+        value: config.labelWidth
+      },
+      size: config.size,
+      multiple: false
     },
     items: [
       {
-        value: '00',
-        label: '选项1'
+        value: '选项1',
+        label: '00'
       },
       {
-        value: '01',
-        label: '选项2'
+        value: '选项2',
+        label: '01'
       },
       {
-        value: '02',
-        label: '选项3'
-      },
-      {
-        value: '03',
-        label: '选项4'
+        value: '选项3',
+        label: '02'
       }
     ]
   },
   {
     type: 'number',
     name: '计数器',
+    param: '',
     options: {
       param: '',
       defaultValue: 0,
@@ -128,7 +145,10 @@ export default [
       max: 100,
       step: 1,
       disabled: false,
-      labelWidth: config.labelWidth,
+      labelWidth: {
+        custom: false,
+        value: config.labelWidth
+      },
       size: config.size
     }
   }

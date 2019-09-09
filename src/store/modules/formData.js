@@ -3,8 +3,7 @@ export default {
   namespaced: true,
   state: {
     selectedList: [],
-    config,
-    setLabelWidth: false //自定义修改字段labelWidth状态
+    config
   },
   mutations: {
     setFormData(state, val) {
@@ -12,9 +11,6 @@ export default {
     },
     setConfig(state, val) {
       state.config = val
-    },
-    toggleSetLabelWidth(state, val) {
-      state.setLabelWidth = val
     }
   }
 }

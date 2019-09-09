@@ -2,6 +2,59 @@
   .form-box {
     height: 450px;
 
+    .form-item {
+      position: relative;
+      margin-bottom: 4px;
+      padding: 20px 60px 20px 10px;
+      border: 1px dashed rgba($theme-color, 0.5);
+      background-color: rgba($theme-color, 0.03);
+
+      &:hover {
+        background-color: rgba($theme-color, 0.08);
+      }
+
+      &.selected {
+        outline: 2px solid $theme-color;
+        border: 1px solid $theme-color;
+        background-color: rgba($theme-color, 0.08);
+      }
+
+
+      .form-item-drag,
+      .form-item-action {
+        position: absolute;
+        padding: 2px;
+        background: $theme-color;
+        z-index: 10;
+        line-height: 24px;
+
+        i {
+          font-size: 16px;
+          color: #fff;
+        }
+      }
+
+      .form-item-drag {
+        right: 0;
+        top: 0;
+
+        i {
+          cursor: move;
+          margin-left: 4px;
+        }
+      }
+
+      .form-item-action {
+        right: 0;
+        bottom: 0;
+
+        i {
+          cursor: pointer;
+          margin: 0 4px;
+        }
+      }
+    }
+
     .ghost {
       background: $theme-color;
       border: 1px solid $theme-color;
@@ -15,67 +68,21 @@
     }
   }
 
-  .form-item {
-    position: relative;
-    margin-bottom: 4px;
-    padding: 20px 60px 20px 10px;
-    border: 1px dashed rgba($theme-color, 0.5);
-    background-color: rgba($theme-color, 0.03);
+  .el-form-item {
+    margin-bottom: 0;
 
-    &:hover {
-      background-color: rgba($theme-color, 0.08);
-    }
-
-    &.selected {
-      outline: 2px solid $theme-color;
-      border: 1px solid $theme-color;
-      background-color: rgba($theme-color, 0.08);
-    }
-
-    &:after {
+    &::after {
       position: absolute;
       left: 0;
       right: 0;
       top: 0;
       bottom: 0;
       display: block;
-      z-index: 9;
-    }
-
-    .form-item-drag,
-    .form-item-action {
-      position: absolute;
-      padding: 2px;
-      background: $theme-color;
       z-index: 10;
-      line-height: 24px;
-      i {
-        font-size: 16px;
-        color: #fff;
-      }
-    }
-
-    .form-item-drag {
-      right: -61px;
-      top: -21px;
-
-      i {
-        cursor: move;
-        margin-left: 4px;
-      }
-    }
-
-    .form-item-action {
-      right: -61px;
-      bottom: -20px;
-
-      i {
-        cursor: pointer;
-        margin: 0 4px;
-      }
     }
 
     .block {
+
       .el-radio,
       .el-checkbox {
         display: block;

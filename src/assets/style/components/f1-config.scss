@@ -1,10 +1,17 @@
 .f1-config {
+
   .el-form {
     padding: 0 24px;
+
     .el-form-item {
       margin-bottom: 12px;
+
       .el-form-item__label {
         padding: 0;
+      }
+
+      .form-width {
+        width: 215px;
       }
 
       .el-radio,
@@ -13,6 +20,7 @@
           width: 160px;
         }
       }
+
       .el-radio {
         margin: 0 0 4px 0;
       }
@@ -23,9 +31,11 @@
         cursor: pointer;
       }
     }
+
     .label-width {
       margin-left: 10px;
     }
+
     .f1-pattern {
       margin-top: 5px;
     }
