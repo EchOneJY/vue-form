@@ -1,21 +1,33 @@
 .f1-list {
+
   .form-box {
+    min-height: 500px;
+
     .form-item {
       position: relative;
       margin-bottom: 4px;
-      padding: 20px 60px 20px 10px;
       border: 1px dashed rgba($theme-color, 0.5);
       background-color: rgba($theme-color, 0.03);
+
+      .el-form-item {
+        border: 2px solid transparent;
+        padding: 20px 60px 20px 10px;
+      }
 
       &:hover {
         background-color: rgba($theme-color, 0.08);
       }
 
       &.selected {
-        outline: 2px solid $theme-color;
         border: 1px solid $theme-color;
         background-color: rgba($theme-color, 0.08);
+
+        .el-form-item {
+          border: 2px solid $theme-color;
+        }
       }
+
+
 
       .form-item-drag,
       .form-item-action {
@@ -79,6 +91,7 @@
     }
 
     .block {
+
       .el-radio,
       .el-checkbox {
         display: block;

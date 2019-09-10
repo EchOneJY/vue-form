@@ -283,14 +283,16 @@ export default {
     }
   },
   watch: {
-    'data.key': function() {
-      this.validator = {
-        type: null,
-        required: null,
-        pattern: null
-      }
-      if (this.data.options.hasOwnProperty('dataType')) {
-        this.validateDataType(this.data.options.dataType)
+    'data.key': function(val) {
+      if (val) {
+        this.validator = {
+          type: null,
+          required: null,
+          pattern: null
+        }
+        if (this.data.options.hasOwnProperty('dataType')) {
+          this.validateDataType(this.data.options.dataType)
+        }
       }
     }
   },
