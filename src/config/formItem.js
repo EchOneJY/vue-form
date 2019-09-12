@@ -12,6 +12,7 @@ export default [
       dataType: 'string',
       pattern: '',
       disabled: false,
+      visible: false,
       labelWidth: {
         custom: false,
         value: config.labelWidth
@@ -28,6 +29,7 @@ export default [
       defaultValue: '',
       required: false,
       disabled: false,
+      visible: false,
       pattern: '',
       placeholder: '',
       rows: '5',
@@ -48,6 +50,7 @@ export default [
       defaultValue: '',
       required: false,
       disabled: false,
+      visible: false,
       style: 'normal',
       labelWidth: {
         custom: false,
@@ -80,6 +83,7 @@ export default [
       defaultValue: [],
       required: false,
       disabled: false,
+      visible: false,
       style: 'normal',
       labelWidth: {
         custom: false,
@@ -115,6 +119,7 @@ export default [
       width: '',
       required: false,
       disabled: false,
+      visible: false,
       labelWidth: {
         custom: false,
         value: config.labelWidth
@@ -148,6 +153,7 @@ export default [
       max: 100,
       step: 1,
       disabled: false,
+      visible: false,
       labelWidth: {
         custom: false,
         value: config.labelWidth

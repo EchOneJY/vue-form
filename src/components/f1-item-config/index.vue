@@ -35,36 +35,20 @@
         ></el-input-number>
       </el-form-item>
       <!-- 最小 -->
-      <el-form-item
-        label="min"
-        v-if="data.options.hasOwnProperty('min')"
-      >
+      <el-form-item label="min" v-if="data.options.hasOwnProperty('min')">
         <el-input-number v-model="data.options.min"></el-input-number>
       </el-form-item>
       <!-- 最大 -->
-      <el-form-item
-        label="max"
-        v-if="data.options.hasOwnProperty('max')"
-      >
+      <el-form-item label="max" v-if="data.options.hasOwnProperty('max')">
         <el-input-number v-model="data.options.max"></el-input-number>
       </el-form-item>
       <!-- 最大 -->
-      <el-form-item
-        label="step"
-        v-if="data.options.hasOwnProperty('step')"
-      >
-        <el-input-number
-          v-model="data.options.step"
-        ></el-input-number>
+      <el-form-item label="step" v-if="data.options.hasOwnProperty('step')">
+        <el-input-number v-model="data.options.step"></el-input-number>
       </el-form-item>
       <!-- rows -->
-      <el-form-item
-        label="rows"
-        v-if="data.options.hasOwnProperty('rows')"
-      >
-        <el-input-number
-          v-model="data.options.rows"
-        ></el-input-number>
+      <el-form-item label="rows" v-if="data.options.hasOwnProperty('rows')">
+        <el-input-number v-model="data.options.rows"></el-input-number>
       </el-form-item>
       <!-- placeholder -->
       <el-form-item
@@ -74,10 +58,7 @@
         <el-input v-model="data.options.placeholder"></el-input>
       </el-form-item>
       <!-- multiple -->
-      <el-form-item
-        label="多选"
-        v-if="data.options.hasOwnProperty('multiple')"
-      >
+      <el-form-item label="多选" v-if="data.options.hasOwnProperty('multiple')">
         <el-switch
           v-model="data.options.multiple"
           @change="toggleDefaultValue"
@@ -94,10 +75,7 @@
           "
           v-model="data.options.defaultValue"
         >
-          <li
-            v-for="(rItem, index) in data.items"
-            :key="rItem.label + index"
-          >
+          <li v-for="(rItem, index) in data.items" :key="rItem.label + index">
             <el-radio :label="rItem.label">
               <el-input v-model="rItem.value"></el-input>
             </el-radio>
@@ -117,10 +95,7 @@
           "
           v-model="data.options.defaultValue"
         >
-          <li
-            v-for="(cItem, index) in data.items"
-            :key="cItem.label + index"
-          >
+          <li v-for="(cItem, index) in data.items" :key="cItem.label + index">
             <el-checkbox :label="cItem.label">
               <el-input v-model="cItem.value"></el-input>
             </el-checkbox>
@@ -134,10 +109,7 @@
         <el-button type="text" @click="addOption">新增选项</el-button>
       </el-form-item>
       <!-- 样式 -->
-      <el-form-item
-        label="样式"
-        v-if="data.options.hasOwnProperty('style')"
-      >
+      <el-form-item label="样式" v-if="data.options.hasOwnProperty('style')">
         <el-select v-model="data.options.style" placeholder="请选择">
           <el-option
             v-for="item in radioStyles"
@@ -176,10 +148,7 @@
         ></el-input-number>
       </el-form-item>
       <!-- 字段宽度 -->
-      <el-form-item
-        label="宽度"
-        v-if="data.options.hasOwnProperty('width')"
-      >
+      <el-form-item label="宽度" v-if="data.options.hasOwnProperty('width')">
         <el-input v-model="data.options.width"></el-input>
       </el-form-item>
       <!-- 字段尺寸 -->
@@ -191,22 +160,13 @@
         </el-radio-group>
       </el-form-item>
       <!-- 禁用 -->
-      <el-form-item
-        label="操作"
-        v-if="data.options.hasOwnProperty('disabled')"
-      >
-        <el-checkbox v-model="data.options.disabled"
-          >禁用</el-checkbox
-        >
+      <el-form-item label="操作" v-if="data.options.hasOwnProperty('disabled')">
+        <el-checkbox v-model="data.options.disabled">禁用</el-checkbox>
+        <el-checkbox v-model="data.options.visible">隐藏</el-checkbox>
       </el-form-item>
       <!-- 校验 -->
-      <el-form-item
-        label="校验"
-        v-if="data.options.hasOwnProperty('required')"
-      >
-        <el-checkbox
-          v-model="data.options.required"
-          @change="validateRequired"
+      <el-form-item label="校验" v-if="data.options.hasOwnProperty('required')">
+        <el-checkbox v-model="data.options.required" @change="validateRequired"
           >必填</el-checkbox
         >
         <el-input

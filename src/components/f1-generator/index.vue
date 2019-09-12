@@ -19,6 +19,7 @@
             ? item.options.labelWidth.value + 'px'
             : config.labelWidth + 'px'
         "
+        v-show="!item.options.visible"
       >
         <!-- Input -->
         <input-item :item="item" :models="models"></input-item>
@@ -29,10 +30,7 @@
         <!-- CheckboxItem -->
         <checkbox-item :item="item" :models="models"></checkbox-item>
         <!-- InputNumber -->
-        <input-number-item
-          :item="item"
-          :models="models"
-        ></input-number-item>
+        <input-number-item :item="item" :models="models"></input-number-item>
         <!-- SelectItem -->
         <select-item :item="item" :models="models"></select-item>
       </el-form-item>
@@ -85,11 +83,7 @@ export default {
     createFormData() {
       if (this.selectedList.length > 0) {
         this.selectedList.map(item => {
-          this.$set(
-            this.models,
-            item.param,
-            item.options.defaultValue
-          )
+          this.$set(this.models, item.param, item.options.defaultValue)
           if (item.hasOwnProperty('rules') && item.rules.length > 0) {
             this.rules[item.param] = item.rules
           }
