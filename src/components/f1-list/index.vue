@@ -23,6 +23,7 @@
         :key="item.key"
       >
         <el-form-item
+          :class="{ hidden: item.options.visible }"
           :label="item.name"
           :label-width="
             item.options.labelWidth.custom
@@ -91,20 +92,14 @@ export default {
     return {}
   },
   computed: {
-    ...mapState('formData', [
-      'selectedList',
-      'config',
-      'setLabelWidth'
-    ])
+    ...mapState('formData', ['selectedList', 'config', 'setLabelWidth'])
   },
   methods: {
     ...mapMutations('formData', ['setFormData']),
     //添加到form-list
     handleAdd(evt) {
       const newIndex = evt.newIndex
-      this.selectedList[newIndex] = this.handleData(
-        this.selectedList[newIndex]
-      )
+      this.selectedList[newIndex] = this.handleData(this.selectedList[newIndex])
       this.setFormData(this.selectedList)
       this.$emit('update:select', this.selectedList[newIndex])
     },
@@ -138,16 +133,12 @@ export default {
       const newObj = JSON.parse(JSON.stringify(obj))
       //为拖拽到容器的元素添加唯一 key
       const key =
-        Date.parse(new Date()) +
-        '_' +
-        Math.ceil(Math.random() * 11111)
+        Date.parse(new Date()) + '_' + Math.ceil(Math.random() * 11111)
       newObj.key = key
       newObj.param = newObj.type + '_' + key
       // 特殊处理
       if (newObj.options.type === 'select') {
-        newObj.options.defaultValue = newObj.options.multiple
-          ? []
-          : ''
+        newObj.options.defaultValue = newObj.options.multiple ? [] : ''
       }
       return newObj
     }

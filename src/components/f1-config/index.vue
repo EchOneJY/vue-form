@@ -12,10 +12,7 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item label="表单宽度">
-        <el-input
-          class="form-width"
-          v-model="config.width"
-        ></el-input>
+        <el-input class="form-width" v-model="config.width"></el-input>
       </el-form-item>
       <el-form-item label="标签宽度">
         <el-input-number

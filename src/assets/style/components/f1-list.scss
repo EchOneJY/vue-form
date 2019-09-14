@@ -23,6 +23,12 @@
 
         .el-form-item {
           border: 2px solid $theme-color;
+
+          &.hidden {
+            &::after {
+              border: 2px solid $theme-color;
+            }
+          }
         }
       }
 
@@ -85,6 +91,12 @@
       bottom: 0;
       display: block;
       z-index: 10;
+    }
+
+    &.hidden {
+      &::after {
+        background-color: rgba(255, 255, 255, 0.6);
+      }
     }
 
     .block {
