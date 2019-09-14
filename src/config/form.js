@@ -2,7 +2,7 @@
 const config = {
   labelPosition: 'left',
   size: 'small',
-  labelWidth: '80',
+  labelWidth: '100',
   width: '100%'
 }
 

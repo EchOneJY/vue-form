@@ -33,6 +33,10 @@
         <input-number-item :item="item" :models="models"></input-number-item>
         <!-- SelectItem -->
         <select-item :item="item" :models="models"></select-item>
+        <!-- TimeItem -->
+        <time-item :item="item" :models="models"></time-item>
+        <!-- DateItem -->
+        <date-item :item="item" :models="models"></date-item>
       </el-form-item>
     </el-form>
   </el-dialog>
@@ -46,6 +50,8 @@ import RadioItem from '../f1-items/radio'
 import CheckboxItem from '../f1-items/checkbox'
 import InputNumberItem from '../f1-items/number'
 import SelectItem from '../f1-items/select'
+import TimeItem from '../f1-items/time'
+import DateItem from '../f1-items/date'
 export default {
   props: ['visible'],
   components: {
@@ -55,7 +61,9 @@ export default {
     RadioItem,
     CheckboxItem,
     InputNumberItem,
-    SelectItem
+    SelectItem,
+    TimeItem,
+    DateItem
   },
   watch: {
     visible(val) {

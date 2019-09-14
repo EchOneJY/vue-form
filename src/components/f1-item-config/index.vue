@@ -34,6 +34,88 @@
           v-model="data.options.defaultValue"
         ></el-input-number>
       </el-form-item>
+      <!-- 可输入 -->
+      <el-form-item
+        label="可输入"
+        v-if="data.options.hasOwnProperty('editable')"
+      >
+        <el-switch v-model="data.options.editable"></el-switch>
+      </el-form-item>
+      <!-- 可清除 -->
+      <el-form-item
+        label="可清除"
+        v-if="data.options.hasOwnProperty('clearable')"
+      >
+        <el-switch v-model="data.options.clearable"></el-switch>
+      </el-form-item>
+      <!-- 选择类型 -->
+      <el-form-item label="类型" v-if="data.options.hasOwnProperty('type')">
+        <el-radio-group v-if="data.type === 'time'" v-model="data.options.type">
+          <el-radio-button label="select">select</el-radio-button>
+          <el-radio-button label="picker">picker</el-radio-button>
+        </el-radio-group>
+        <el-select v-if="data.type === 'date'" v-model="data.options.type">
+          <el-option
+            v-for="item in dateType"
+            :key="item"
+            :label="item"
+            :value="item"
+          ></el-option>
+        </el-select>
+      </el-form-item>
+      <!-- 时间间隔 -->
+      <el-form-item
+        label="时间设置"
+        class="time-interval"
+        v-if="data.options.hasOwnProperty('selectOptions')"
+      >
+        <template v-if="data.options.type === 'select'">
+          <el-input
+            placeholder="开始时间"
+            v-model="data.options.selectOptions.start"
+          >
+            <template slot="prepend"
+              >开始时间</template
+            >
+          </el-input>
+          <el-input
+            placeholder="结束时间"
+            v-model="data.options.selectOptions.end"
+          >
+            <template slot="prepend"
+              >结束时间</template
+            >
+          </el-input>
+          <el-input
+            placeholder="时间间隔"
+            v-model="data.options.selectOptions.step"
+          >
+            <template slot="prepend"
+              >时间间隔</template
+            >
+          </el-input>
+        </template>
+        <template v-else>
+          <el-input
+            placeholder="可选范围"
+            v-model="data.options.pikerOptions.selectableRange"
+          >
+            <template slot="prepend"
+              >可选范围</template
+            >
+          </el-input>
+        </template>
+      </el-form-item>
+      <!-- 时间范围 -->
+      <!-- <el-form-item
+        label="时间范围"
+        v-if="data.options.hasOwnProperty('isRange')"
+      >
+        <el-switch
+          v-model="data.options.isRange"
+          @change="toggleRange"
+        ></el-switch>
+      </el-form-item>-->
       <!-- 最小 -->
       <el-form-item label="min" v-if="data.options.hasOwnProperty('min')">
         <el-input-number v-model="data.options.min"></el-input-number>
@@ -239,7 +321,18 @@ export default {
         type: null,
         required: null,
         pattern: null
-      }
+      },
+      dateType: [
+        'year',
+        'month',
+        'date',
+        'dates',
+        'week',
+        'datetime',
+        'datetimerange',
+        'daterange',
+        'monthrange'
+      ]
     }
   },
   watch: {
@@ -282,6 +375,11 @@ export default {
           label: '02'
         }
       ]
+    },
+    toggleRange(e) {
+      if (e) {
+        this.data.options.type = 'picker'
+      }
     },
     //添加rules
     addRules() {

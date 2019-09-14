@@ -45,6 +45,10 @@
           <input-number-item :item="item"></input-number-item>
           <!-- SelectItem -->
           <select-item :item="item"></select-item>
+          <!-- TimeItem -->
+          <time-item :item="item"></time-item>
+          <!-- DateItem -->
+          <date-item :item="item"></date-item>
         </el-form-item>
         <div class="form-item-action" v-if="item.key === select.key">
           <i
@@ -76,6 +80,8 @@ import RadioItem from '../f1-items/radio'
 import CheckboxItem from '../f1-items/checkbox'
 import InputNumberItem from '../f1-items/number'
 import SelectItem from '../f1-items/select'
+import TimeItem from '../f1-items/time'
+import DateItem from '../f1-items/date'
 export default {
   components: {
     // 调用组件
@@ -85,7 +91,9 @@ export default {
     RadioItem,
     CheckboxItem,
     InputNumberItem,
-    SelectItem
+    SelectItem,
+    TimeItem,
+    DateItem
   },
   props: ['select'],
   data() {

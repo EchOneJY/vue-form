@@ -150,11 +150,11 @@ export default [
       param: '',
       defaultValue: 0,
       required: false,
+      disabled: false,
+      visible: false,
       min: 0,
       max: 100,
       step: 1,
-      disabled: false,
-      visible: false,
       labelWidth: {
         custom: false,
         value: config.labelWidth
@@ -178,7 +178,16 @@ export default [
       startPlaceholder: '开始时间',
       endPlaceholder: '结束时间',
       isRange: false,
-      format: 'HH:mm:ss',
+      type: 'select',
+      selectOptions: {
+        start: '09:00',
+        end: '18:00',
+        step: '00:30'
+      },
+      pikerOptions: {
+        selectableRange: '',
+        format: 'HH:mm:ss'
+      },
       labelWidth: {
         custom: false,
         value: config.labelWidth
@@ -201,7 +210,6 @@ export default [
       clearable: true,
       startPlaceholder: '开始时间',
       endPlaceholder: '结束时间',
-      isRange: false,
       type: 'date',
       format: 'yyyy-MM-dd',
       labelWidth: {
