@@ -144,10 +144,60 @@ export default [
     options: {
       param: '',
       defaultValue: 0,
+      required: false,
       min: 0,
       max: 100,
       step: 1,
       disabled: false,
+      labelWidth: {
+        custom: false,
+        value: config.labelWidth
+      },
+      size: config.size
+    }
+  },
+  {
+    type: 'time',
+    name: '时间选择器',
+    param: '',
+    options: {
+      param: '',
+      defaultValue: '',
+      required: false,
+      disabled: false,
+      visible: false,
+      placeholder: '',
+      editable: true,
+      clearable: true,
+      startPlaceholder: '开始时间',
+      endPlaceholder: '结束时间',
+      isRange: false,
+      format: 'HH:mm:ss',
+      labelWidth: {
+        custom: false,
+        value: config.labelWidth
+      },
+      size: config.size
+    }
+  },
+  {
+    type: 'date',
+    name: '日期选择器',
+    param: '',
+    options: {
+      param: '',
+      defaultValue: '',
+      required: false,
+      disabled: false,
+      visible: false,
+      placeholder: '',
+      editable: true,
+      clearable: true,
+      startPlaceholder: '开始时间',
+      endPlaceholder: '结束时间',
+      isRange: false,
+      type: 'date',
+      format: 'yyyy-MM-dd',
       labelWidth: {
         custom: false,
         value: config.labelWidth
