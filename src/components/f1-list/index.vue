@@ -49,6 +49,8 @@
           <time-item :item="item"></time-item>
           <!-- DateItem -->
           <date-item :item="item"></date-item>
+          <!-- ImguploadItem -->
+          <imgupload-item :item="item"></imgupload-item>
         </el-form-item>
         <div class="form-item-action" v-if="item.key === select.key">
           <i
@@ -82,6 +84,7 @@ import InputNumberItem from '../f1-items/number'
 import SelectItem from '../f1-items/select'
 import TimeItem from '../f1-items/time'
 import DateItem from '../f1-items/date'
+import ImguploadItem from '../f1-items/imgupload'
 export default {
   components: {
     // 调用组件
@@ -93,7 +96,8 @@ export default {
     InputNumberItem,
     SelectItem,
     TimeItem,
-    DateItem
+    DateItem,
+    ImguploadItem
   },
   props: ['select'],
   data() {

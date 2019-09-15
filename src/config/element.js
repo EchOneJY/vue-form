@@ -46,7 +46,8 @@ import {
   Footer,
   Card,
   Scrollbar,
-  ColorPicker
+  ColorPicker,
+  Upload
 } from 'element-ui'
 
 Vue.use(Pagination)
@@ -93,6 +94,7 @@ Vue.use(Footer)
 Vue.use(Card)
 Vue.use(Scrollbar)
 Vue.use(ColorPicker)
+Vue.use(Upload)
 
 Vue.use(Loading.directive)
 

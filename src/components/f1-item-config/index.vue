@@ -35,19 +35,19 @@
         ></el-input-number>
       </el-form-item>
       <!-- 可输入 -->
-      <el-form-item
+      <!-- <el-form-item
         label="可输入"
         v-if="data.options.hasOwnProperty('editable')"
       >
         <el-switch v-model="data.options.editable"></el-switch>
-      </el-form-item>
+      </el-form-item> -->
       <!-- 可清除 -->
-      <el-form-item
+      <!-- <el-form-item
         label="可清除"
         v-if="data.options.hasOwnProperty('clearable')"
       >
         <el-switch v-model="data.options.clearable"></el-switch>
-      </el-form-item>
+      </el-form-item> -->
       <!-- 选择类型 -->
       <el-form-item label="类型" v-if="data.options.hasOwnProperty('type')">
         <el-radio-group v-if="data.type === 'time'" v-model="data.options.type">

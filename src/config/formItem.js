@@ -218,5 +218,26 @@ export default [
       },
       size: config.size
     }
+  },
+  {
+    type: 'imgupload',
+    name: '图片上传',
+    param: '',
+    options: {
+      param: '',
+      defaultValue: '',
+      required: false,
+      disabled: false,
+      visible: false,
+      placeholder: '',
+      labelWidth: {
+        custom: false,
+        value: config.labelWidth
+      },
+      size: config.size,
+      action: 'https://jsonplaceholder.typicode.com/posts/',
+      multiple: false,
+      accept: ''
+    }
   }
 ]

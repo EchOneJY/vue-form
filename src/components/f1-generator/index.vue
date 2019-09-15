@@ -37,6 +37,8 @@
         <time-item :item="item" :models="models"></time-item>
         <!-- DateItem -->
         <date-item :item="item" :models="models"></date-item>
+        <!-- ImguploadItem -->
+        <imgupload-item :item="item" :models="models"></imgupload-item>
       </el-form-item>
     </el-form>
   </el-dialog>
@@ -52,6 +54,7 @@ import InputNumberItem from '../f1-items/number'
 import SelectItem from '../f1-items/select'
 import TimeItem from '../f1-items/time'
 import DateItem from '../f1-items/date'
+import ImguploadItem from '../f1-items/imgupload'
 export default {
   props: ['visible'],
   components: {
@@ -63,7 +66,8 @@ export default {
     InputNumberItem,
     SelectItem,
     TimeItem,
-    DateItem
+    DateItem,
+    ImguploadItem
   },
   watch: {
     visible(val) {
