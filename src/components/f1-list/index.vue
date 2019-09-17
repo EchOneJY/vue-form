@@ -43,6 +43,8 @@
           <checkbox-item :item="item"></checkbox-item>
           <!-- InputNumber -->
           <input-number-item :item="item"></input-number-item>
+          <!-- SwitchItem -->
+          <switch-item :item="item"></switch-item>
           <!-- SelectItem -->
           <select-item :item="item"></select-item>
           <!-- TimeItem -->
@@ -81,13 +83,13 @@ import TextareaItem from '../f1-items/textarea'
 import RadioItem from '../f1-items/radio'
 import CheckboxItem from '../f1-items/checkbox'
 import InputNumberItem from '../f1-items/number'
+import SwitchItem from '../f1-items/switch'
 import SelectItem from '../f1-items/select'
 import TimeItem from '../f1-items/time'
 import DateItem from '../f1-items/date'
 import ImguploadItem from '../f1-items/imgupload'
 export default {
   components: {
-    // 调用组件
     draggable,
     InputItem,
     TextareaItem,
@@ -97,7 +99,8 @@ export default {
     SelectItem,
     TimeItem,
     DateItem,
-    ImguploadItem
+    ImguploadItem,
+    SwitchItem
   },
   props: ['select'],
   data() {

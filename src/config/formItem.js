@@ -163,6 +163,25 @@ export default [
     }
   },
   {
+    type: 'switch',
+    name: '开关',
+    param: '',
+    options: {
+      width: '100%',
+      defaultValue: false,
+      required: false,
+      disabled: false,
+      visible: false,
+      labelWidth: {
+        custom: false,
+        value: config.labelWidth
+      },
+      size: config.size,
+      activeText: '',
+      InactiveText: ''
+    }
+  },
+  {
     type: 'time',
     name: '时间选择器',
     param: '',

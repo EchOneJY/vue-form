@@ -31,6 +31,8 @@
         <checkbox-item :item="item" :models="models"></checkbox-item>
         <!-- InputNumber -->
         <input-number-item :item="item" :models="models"></input-number-item>
+        <!-- SwitchItem -->
+        <switch-item :item="item" :models="models"></switch-item>
         <!-- SelectItem -->
         <select-item :item="item" :models="models"></select-item>
         <!-- TimeItem -->
@@ -51,6 +53,7 @@ import TextareaItem from '../f1-items/textarea'
 import RadioItem from '../f1-items/radio'
 import CheckboxItem from '../f1-items/checkbox'
 import InputNumberItem from '../f1-items/number'
+import SwitchItem from '../f1-items/switch'
 import SelectItem from '../f1-items/select'
 import TimeItem from '../f1-items/time'
 import DateItem from '../f1-items/date'
@@ -64,6 +67,7 @@ export default {
     RadioItem,
     CheckboxItem,
     InputNumberItem,
+    SwitchItem,
     SelectItem,
     TimeItem,
     DateItem,
