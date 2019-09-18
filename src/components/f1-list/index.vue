@@ -152,7 +152,7 @@ export default {
       newObj.key = key
       newObj.param = newObj.type + '_' + key
       // 特殊处理
-      if (newObj.options.type === 'select') {
+      if (newObj.type === 'select') {
         newObj.options.defaultValue = newObj.options.multiple ? [] : ''
       }
       return newObj

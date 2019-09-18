@@ -219,7 +219,6 @@ export default [
     name: '日期选择器',
     param: '',
     options: {
-      param: '',
       defaultValue: '',
       required: false,
       disabled: false,

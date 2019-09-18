@@ -40,14 +40,14 @@
         v-if="data.options.hasOwnProperty('editable')"
       >
         <el-switch v-model="data.options.editable"></el-switch>
-      </el-form-item> -->
+      </el-form-item>-->
       <!-- 可清除 -->
       <!-- <el-form-item
         label="可清除"
         v-if="data.options.hasOwnProperty('clearable')"
       >
         <el-switch v-model="data.options.clearable"></el-switch>
-      </el-form-item> -->
+      </el-form-item>-->
       <!-- 选择类型 -->
       <el-form-item label="类型" v-if="data.options.hasOwnProperty('type')">
         <el-radio-group v-if="data.type === 'time'" v-model="data.options.type">
@@ -408,11 +408,11 @@ export default {
     },
     //正则校验
     validatePattern(val) {
-      console.log(val)
-      if (val) {
+      if (val.target.value) {
         this.validator.pattern = {
-          pattern: val,
-          message: this.data.name + '格式不匹配'
+          pattern: val.target.value,
+          message: this.data.name + '格式不匹配',
+          trigger: 'blur'
         }
       } else {
         this.validator.pattern = null
